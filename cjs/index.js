@@ -41,7 +41,8 @@ var config = function config() {
       height: deviceHeight
     });
   } else {
-    var box = container.getBoundingClientRect();
+    var box = __container.getBoundingClientRect();
+
     var coords = (0, _getCoords["default"])(box);
     var width;
     var height;
