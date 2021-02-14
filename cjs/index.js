@@ -15,11 +15,11 @@ var _debounce = _interopRequireDefault(require("@indlekofer/debounce"));
 
 var _media = require("@indlekofer/media");
 
-var _getCoords = _interopRequireDefault(require("./getCoords"));
+var _getCoords = _interopRequireDefault(require("./utils/getCoords"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var GET_SIZE = '@indlekofer/media_container/GET_SIZE';
 exports.GET_SIZE = GET_SIZE;
@@ -45,7 +45,6 @@ var config = function config() {
 
     var coords = (0, _getCoords["default"])(box);
     var width;
-    var height;
 
     if (box.width == 0) {
       width = deviceWidth - coords.left * 2;
@@ -53,7 +52,12 @@ var config = function config() {
       width = box.width;
     }
 
-    height = deviceHeight - coords.top;
+    var height = deviceHeight - coords.top; // detect and remove padding
+
+    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-top'));
+    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-bottom'));
+    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-left'));
+    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-right'));
     (0, _media.handleChange)(GET_SIZE, {
       width: width,
       height: height

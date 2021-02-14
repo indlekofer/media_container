@@ -1,6 +1,7 @@
 import debounce from '@indlekofer/debounce';
 import { handleChange, REDUCER } from '@indlekofer/media';
-import getCoords from './getCoords';
+import getCoords from './utils/getCoords';
+
 const GET_SIZE = '@indlekofer/media_container/GET_SIZE';
 
 let __container = null;
@@ -15,13 +16,18 @@ export const config = (deviceWidth = null, deviceHeight = null, force = false) =
     const box = __container.getBoundingClientRect();
     const coords = getCoords(box);
     let width;
-    let height;
     if (box.width == 0) {
       width = deviceWidth - coords.left * 2;
     }	else {
       width = box.width;
     }
-    height = deviceHeight - coords.top;
+    let height = deviceHeight - coords.top;
+
+    // detect and remove padding
+    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-top'));
+    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-bottom'));
+    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-left'));
+    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-right'));
 
     handleChange(GET_SIZE, { width, height });
   }
