@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## 0.2.1 (2021-03-01)
+
+* bugfix: container padding
+
 ## 0.2.0 (2021-02-14)
 
 * added container padding calculation

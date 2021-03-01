@@ -24,10 +24,10 @@ export const config = (deviceWidth = null, deviceHeight = null, force = false) =
     let height = deviceHeight - coords.top;
 
     // detect and remove padding
-    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-top'));
-    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-bottom'));
-    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-left'));
-    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-right'));
+    height -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-top'));
+    height -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-bottom'));
+    width -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-left'));
+    width -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-right'));
 
     handleChange(GET_SIZE, { width, height });
   }

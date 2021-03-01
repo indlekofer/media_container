@@ -54,10 +54,10 @@ var config = function config() {
 
     var height = deviceHeight - coords.top; // detect and remove padding
 
-    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-top'));
-    height -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-bottom'));
-    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-left'));
-    width -= parseFloat(window.getComputedStyle(box, null).getPropertyValue('padding-right'));
+    height -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-top'));
+    height -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-bottom'));
+    width -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-left'));
+    width -= parseFloat(window.getComputedStyle(__container, null).getPropertyValue('padding-right'));
     (0, _media.handleChange)(GET_SIZE, {
       width: width,
       height: height
